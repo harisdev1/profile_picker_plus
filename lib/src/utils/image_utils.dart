@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'dart:isolate';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 /// Utility functions for image compression and file-size validation.
