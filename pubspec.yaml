@@ -1,0 +1,51 @@
+name: profile_picker_plus
+description: >-
+  The complete Flutter profile picture toolkit — pick, crop, display.
+  Drop-in AvatarPicker and AvatarDisplay widgets with gallery/camera
+  selection, built-in image cropping, bottom-sheet & dialog modes,
+  fallback initials, deep theming, and programmatic controller support.
+version: 1.0.0
+homepage: https://github.com/harisdev1/profile_picker_plus
+repository: https://github.com/harisdev1/profile_picker_plus
+issue_tracker: https://github.com/harisdev1/profile_picker_plus/issues
+
+topics:
+  - images
+  - avatar
+  - profile
+  - picker
+  - cropper
+  - camera
+  - gallery
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Image picking from gallery and camera (latest: ^1.2.1)
+  image_picker: ^1.2.1
+
+  # Native image cropping: Android uCrop, iOS TOCropViewController, Web cropperjs (latest: ^9.0.0)
+  image_cropper: ^12.0.0
+
+  # Runtime permission handling for camera & gallery
+  permission_handler: ^11.4.0
+
+  # Optional image compression (used when compressionQuality < 100)
+  flutter_image_compress: ^2.3.0
+
+  # Cached network image display in AvatarDisplay
+  cached_network_image: ^3.4.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  mocktail: ^1.0.4
+
+flutter:
+  # No assets or fonts bundled — all UI is code-based
