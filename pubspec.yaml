@@ -4,7 +4,7 @@ description: >-
   Drop-in ProfilePicker and ProfileDisplay widgets with gallery/camera
   selection, built-in image cropping, bottom-sheet & dialog modes,
   fallback initials, deep theming, and programmatic controller support.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/harisdev1/profile_picker_plus
 repository: https://github.com/harisdev1/profile_picker_plus
 issue_tracker: https://github.com/harisdev1/profile_picker_plus/issues
@@ -15,6 +15,10 @@ topics:
   - profile
   - picker
   - cropper
+
+platforms:
+  android:
+  ios:
 
 environment:
   sdk: ">=3.0.0 <4.0.0"

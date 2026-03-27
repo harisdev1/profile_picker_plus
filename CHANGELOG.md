@@ -1,12 +1,19 @@
+## 1.0.1
+
+* Declare explicit platform support (Android, iOS) in pubspec.yaml
+* Update class names in README and CHANGELOG (`ProfilePicker`, `ProfileDisplay`, `ProfilePickerTheme`, etc.)
+* Remove unused imports
+* Sort dependencies alphabetically
+
 ## 1.0.0
 
-* Initial release 🎉
-* `AvatarPicker` — tap-to-pick widget with gallery/camera/crop pipeline
-* `AvatarDisplay` — read-only display widget (file, URL, bytes, asset, initials)
-* `ProfilePickerPlusTheme` — unified theming for all widget UI
-* `ProfilePickerPlusThemeProvider` — app-wide InheritedWidget theme provider
-* `ProfilePickerPlusController` — programmatic open/close/clear/set
-* `ProfilePickerPlusStrings` — fully localizable UI labels
+* Initial release
+* `ProfilePicker` — tap-to-pick widget with gallery/camera/crop pipeline
+* `ProfileDisplay` — read-only display widget (file, URL, bytes, asset, initials)
+* `ProfilePickerTheme` — unified theming for all widget UI
+* `ProfilePickerThemeProvider` — app-wide InheritedWidget theme provider
+* `ProfilePickerController` — programmatic open/close/clear/set
+* `ProfilePickerStrings` — fully localizable UI labels
 * Bottom sheet and dialog picker modes
 * Badge position, layout mode (stack/overlay/none), inside/outside placement
 * Trigger modes: onTap, onLongPress, onDoubleTap, none
