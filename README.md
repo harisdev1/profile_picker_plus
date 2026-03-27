@@ -7,7 +7,7 @@
 [![Flutter](https://img.shields.io/badge/Flutter-%3E%3D3.10-blue)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-%3E%3D3.0-blue)](https://dart.dev)
 
-Drop-in `AvatarPicker` and `AvatarDisplay` widgets with gallery/camera
+Drop-in `ProfilePicker` and `ProfileDisplay` widgets with gallery/camera
 selection, built-in image cropping, bottom-sheet & dialog modes, fallback
 initials, deep theming, and a programmatic controller — all in one package.
 
@@ -22,16 +22,16 @@ initials, deep theming, and a programmatic controller — all in one package.
 | Bottom sheet **and** dialog picker modes | ✅ |
 | Fallback initials avatar | ✅ |
 | Network / File / Asset / Bytes image display | ✅ |
-| Full theming via `ProfilePickerPlusTheme` | ✅ |
-| App-wide theme with `ProfilePickerPlusThemeProvider` | ✅ |
-| Programmatic controller (`ProfilePickerPlusController`) | ✅ |
+| Full theming via `ProfilePickerTheme` | ✅ |
+| App-wide theme with `ProfilePickerThemeProvider` | ✅ |
+| Programmatic controller (`ProfilePickerController`) | ✅ |
 | Badge position, layout mode, and custom badge widget | ✅ |
 | Trigger mode (tap / long-press / double-tap / none) | ✅ |
 | Custom builders (header, footer, option tiles, full sheet) | ✅ |
 | Image compression | ✅ |
 | Max file-size guard | ✅ |
 | Permission handling with graceful denied state | ✅ |
-| Localizable strings (`ProfilePickerPlusStrings`) | ✅ |
+| Localizable strings (`ProfilePickerStrings`) | ✅ |
 | 100% null-safe, Dart 3, Material 3 | ✅ |
 
 ---
@@ -176,7 +176,7 @@ cd ios && pod install
 ```dart
 import 'package:profile_picker_plus/profile_picker_plus.dart';
 
-AvatarPicker(
+ProfilePicker(
   fallbackInitials: 'AK',
   onImageSelected: (file) {
     setState(() => _profileFile = file);
@@ -186,7 +186,7 @@ AvatarPicker(
 
 ---
 
-## AvatarPicker
+## ProfilePicker
 
 The main interactive widget. Tap to open the picker, run the crop + compress
 pipeline, and receive a `File?` via `onImageSelected`.
@@ -194,7 +194,7 @@ pipeline, and receive a `File?` via `onImageSelected`.
 ### Minimal
 
 ```dart
-AvatarPicker(
+ProfilePicker(
   fallbackInitials: 'JD',
   onImageSelected: (file) => setState(() => _photo = file),
 )
@@ -203,15 +203,15 @@ AvatarPicker(
 ### Fully customised
 
 ```dart
-AvatarPicker(
+ProfilePicker(
   radius: 60,
-  pickerMode: AvatarPickerMode.dialog,
+  pickerMode: ProfilePickerMode.dialog,
   cropAspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
   allowRemove: true,
   compressionQuality: 75,
   fallbackInitials: 'JD',
   badgePosition: BadgePosition.bottomRight,
-  theme: ProfilePickerPlusTheme(
+  theme: ProfilePickerTheme(
     primaryColor: Colors.teal,
     sheetBorderRadius: 24,
   ),
@@ -225,7 +225,7 @@ AvatarPicker(
 |---|---|---|---|
 | `onImageSelected` | `Function(File?)` | **required** | Called after pick + crop. Null when photo removed. |
 | `radius` | `double` | `48.0` | Avatar radius in logical pixels. |
-| `pickerMode` | `AvatarPickerMode` | `.bottomSheet` | `bottomSheet` or `dialog`. |
+| `pickerMode` | `ProfilePickerMode` | `.bottomSheet` | `bottomSheet` or `dialog`. |
 | `cropEnabled` | `bool` | `true` | Enable/disable the crop step. |
 | `cropAspectRatio` | `CropAspectRatio?` | `null` | Lock aspect ratio. Null = free crop. |
 | `allowGallery` | `bool` | `true` | Show gallery option. |
@@ -243,35 +243,35 @@ AvatarPicker(
 | `badgeInside` | `bool` | `false` | Clip badge inside avatar boundary. |
 | `badgeLayoutMode` | `BadgeLayoutMode` | `.stack` | `stack`, `overlay`, or `none`. |
 | `badgeVisible` | `bool` | `true` | Show/hide badge without removing from tree. |
-| `triggerMode` | `AvatarTriggerMode` | `.onTap` | `onTap`, `onLongPress`, `onDoubleTap`, `none`. |
-| `controller` | `ProfilePickerPlusController?` | `null` | Programmatic open/close/clear/set. |
-| `child` | `AvatarPickerBuilder?` | `null` | `(context, open) => YourWidget()` builder pattern. |
-| `pickerBuilder` | `AvatarPickerSheetBuilder?` | `null` | Fully replace sheet/dialog content. |
-| `optionBuilder` | `AvatarOptionBuilder?` | `null` | Override individual option tiles. |
+| `triggerMode` | `ProfileTriggerMode` | `.onTap` | `onTap`, `onLongPress`, `onDoubleTap`, `none`. |
+| `controller` | `ProfilePickerController?` | `null` | Programmatic open/close/clear/set. |
+| `child` | `ProfilePickerBuilder?` | `null` | `(context, open) => YourWidget()` builder pattern. |
+| `pickerBuilder` | `ProfilePickerSheetBuilder?` | `null` | Fully replace sheet/dialog content. |
+| `optionBuilder` | `ProfileOptionBuilder?` | `null` | Override individual option tiles. |
 | `headerBuilder` | `WidgetBuilder?` | `null` | Replace sheet/dialog title area. |
 | `footerBuilder` | `WidgetBuilder?` | `null` | Add custom footer to sheet/dialog. |
-| `theme` | `ProfilePickerPlusTheme?` | `null` | Theme override for this widget. |
-| `pickerStrings` | `ProfilePickerPlusStrings?` | `null` | Localizable UI labels. |
+| `theme` | `ProfilePickerTheme?` | `null` | Theme override for this widget. |
+| `pickerStrings` | `ProfilePickerStrings?` | `null` | Localizable UI labels. |
 | `loadingWidget` | `Widget?` | `null` | Replace default loading indicator. |
 | `enabled` | `bool` | `true` | Disable all interaction. |
 | `shape` | `ShapeBorder?` | `CircleBorder` | Custom clip shape. |
 
 ---
 
-## AvatarDisplay
+## ProfileDisplay
 
 Read-only avatar widget. No picker. Perfect for lists, headers, chat bubbles.
 
 ```dart
 // Network URL with initials fallback
-AvatarDisplay(
+ProfileDisplay(
   imageUrl: user.avatarUrl,
   fallbackInitials: user.name,
   radius: 32,
 )
 
 // Rounded rectangle shape with border
-AvatarDisplay(
+ProfileDisplay(
   imageFile: _localFile,
   radius: 40,
   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -281,11 +281,11 @@ AvatarDisplay(
 
 ---
 
-## ProfilePickerPlusTheme
+## ProfilePickerTheme
 
 ```dart
-AvatarPicker(
-  theme: ProfilePickerPlusTheme(
+ProfilePicker(
+  theme: ProfilePickerTheme(
     primaryColor: Colors.deepPurple,       // badges, active controls
     badgeColor: Colors.deepPurple,
     badgeIcon: Icons.camera_alt,
@@ -300,8 +300,8 @@ AvatarPicker(
 For **app-wide** theming, wrap your `MaterialApp`:
 
 ```dart
-ProfilePickerPlusThemeProvider(
-  theme: ProfilePickerPlusTheme(primaryColor: Colors.teal),
+ProfilePickerThemeProvider(
+  theme: ProfilePickerTheme(primaryColor: Colors.teal),
   child: MaterialApp(home: MyApp()),
 )
 ```
@@ -312,8 +312,8 @@ ProfilePickerPlusThemeProvider(
 behavior unchanged if you do not set these values.
 
 ```dart
-AvatarPicker(
-  theme: ProfilePickerPlusTheme(
+ProfilePicker(
+  theme: ProfilePickerTheme(
     badgeColor: Colors.teal,
     badgeIcon: Icons.camera_alt,
     badgeIconColor: Colors.white,
@@ -356,10 +356,10 @@ Badge-focused theme properties:
 
 ---
 
-## ProfilePickerPlusController
+## ProfilePickerController
 
 ```dart
-final _controller = ProfilePickerPlusController();
+final _controller = ProfilePickerController();
 
 @override
 void dispose() {
@@ -368,9 +368,9 @@ void dispose() {
 }
 
 // In build():
-AvatarPicker(
+ProfilePicker(
   controller: _controller,
-  triggerMode: AvatarTriggerMode.none,
+  triggerMode: ProfileTriggerMode.none,
   badgeLayoutMode: BadgeLayoutMode.none,
   onImageSelected: (file) {},
 ),
@@ -397,7 +397,7 @@ ElevatedButton(
 ### Custom option tile
 
 ```dart
-AvatarPicker(
+ProfilePicker(
   allowRemove: true,
   optionBuilder: (type, action) {
     if (type == OptionType.remove) {
@@ -416,8 +416,8 @@ AvatarPicker(
 ### Custom trigger (child builder)
 
 ```dart
-AvatarPicker(
-  triggerMode: AvatarTriggerMode.none,
+ProfilePicker(
+  triggerMode: ProfileTriggerMode.none,
   badgeLayoutMode: BadgeLayoutMode.none,
   child: (context, open) => ElevatedButton(
     onPressed: open,
@@ -432,8 +432,8 @@ AvatarPicker(
 ## Localisation
 
 ```dart
-AvatarPicker(
-  pickerStrings: ProfilePickerPlusStrings(
+ProfilePicker(
+  pickerStrings: ProfilePickerStrings(
     pickerTitle: 'Foto de Perfil',
     galleryLabel: 'Elegir de la Galería',
     cameraLabel: 'Tomar una Foto',
